@@ -23,7 +23,9 @@
     "migration:create": "npm run typeorm -- migration:create",
     "migration:run": "npm run typeorm -- migration:run -d src/database/data-source.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d src/database/data-source.ts",
-    "migration:show": "npm run typeorm -- migration:show -d src/database/data-source.ts"
+    "migration:show": "npm run typeorm -- migration:show -d src/database/data-source.ts",
+    "db:test": "ts-node -r tsconfig-paths/register scripts/test-db-connection.ts",
+    "db:verify-ssl": "ts-node scripts/verify-ssl-config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

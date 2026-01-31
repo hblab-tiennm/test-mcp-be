@@ -12,12 +12,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           configService.get<string>('NODE_ENV') === 'production';
         const dbHost = configService.get<string>('DB_HOST', 'localhost');
 
-        // Enable SSL for production or when explicitly set
-        // Aurora/RDS requires SSL, so enable by default for non-localhost
+        // Enable SSL for Aurora/RDS connections
+        // Disable only for localhost or 127.0.0.1 (local dev)
         const disableSsl =
           configService.get<string>('DB_SSL_DISABLED') === 'true';
-        const enableSsl =
-          isProduction || (dbHost !== 'localhost' && !disableSsl);
+        const isLocalhost =
+          dbHost === 'localhost' ||
+          dbHost === '127.0.0.1' ||
+          dbHost === '::1';
+        const enableSsl = !isLocalhost && !disableSsl;
 
         return {
           type: 'postgres',

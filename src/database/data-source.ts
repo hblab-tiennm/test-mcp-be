@@ -5,12 +5,13 @@ import { config } from 'dotenv';
 config();
 
 const dbHost = process.env.DB_HOST || 'localhost';
-const isProduction = process.env.NODE_ENV === 'production';
 
-// Enable SSL for production or when connecting to non-localhost (Aurora/RDS)
-// Aurora requires SSL, so enable by default for remote connections
+// Enable SSL for Aurora/RDS connections
+// Disable only for localhost or 127.0.0.1 (local dev)
 const disableSsl = process.env.DB_SSL_DISABLED === 'true';
-const enableSsl = isProduction || (dbHost !== 'localhost' && !disableSsl);
+const isLocalhost =
+  dbHost === 'localhost' || dbHost === '127.0.0.1' || dbHost === '::1';
+const enableSsl = !isLocalhost && !disableSsl;
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

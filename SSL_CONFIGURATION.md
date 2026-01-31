@@ -7,13 +7,15 @@ Aurora PostgreSQL **requires SSL/TLS connections** by default. This application 
 ## Automatic SSL Detection
 
 ### SSL is **ENABLED** automatically when:
-- ✅ `NODE_ENV=production` (any database host)
-- ✅ `DB_HOST` is NOT `localhost` (development/staging Aurora)
-- ✅ Connecting to Aurora/RDS endpoints
+- ✅ `DB_HOST` is NOT localhost/127.0.0.1/::1
+- ✅ Connecting to any remote database (Aurora/RDS/other)
+- ✅ Any IP address that is not localhost (e.g., 10.0.x.x, 172.x.x.x)
 
 ### SSL is **DISABLED** automatically when:
 - ❌ `DB_HOST=localhost` (local PostgreSQL)
-- ❌ Development mode with local database
+- ❌ `DB_HOST=127.0.0.1` (local PostgreSQL)
+- ❌ `DB_HOST=::1` (local PostgreSQL IPv6)
+- ❌ `DB_SSL_DISABLED=true` is explicitly set
 
 ## Configuration
 
