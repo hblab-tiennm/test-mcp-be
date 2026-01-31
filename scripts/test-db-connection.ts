@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { AppDataSource } from '../src/database/data-source';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 async function testConnection() {
   console.log('🔍 Testing database connection...\n');
+
+  const options = AppDataSource.options as PostgresConnectionOptions;
 
   console.log('Configuration:');
   console.log('- Host:', process.env.DB_HOST || 'localhost');
   console.log('- Port:', process.env.DB_PORT || 5432);
   console.log('- Database:', process.env.DB_NAME || 'test_db');
   console.log('- Username:', process.env.DB_USERNAME || 'postgres');
-  console.log('- SSL Enabled:', AppDataSource.options.ssl ? 'Yes' : 'No');
+  console.log('- SSL Enabled:', options.ssl ? 'Yes' : 'No');
   console.log('- Environment:', process.env.NODE_ENV || 'development');
   console.log('');
 
@@ -48,7 +55,7 @@ async function testConnection() {
       migrations.forEach((m: any) => {
         console.log(`  - ${m.name} (${new Date(m.timestamp).toISOString()})`);
       });
-    } catch (err) {
+    } catch {
       console.log('\n⚠️  No migrations table found (run migrations first)');
     }
 
@@ -67,4 +74,4 @@ async function testConnection() {
   }
 }
 
-testConnection();
+void testConnection();
