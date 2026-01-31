@@ -93,10 +93,6 @@ docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPOSITORY_
         {
           "name": "PORT",
           "value": "3000"
-        },
-        {
-          "name": "DB_SSL_ENABLED",
-          "value": "true"
         }
       ],
       "secrets": [
@@ -266,8 +262,8 @@ export DB_PORT=5432
 export DB_USERNAME=admin
 export DB_PASSWORD=YourSecurePassword
 export DB_NAME=myapp_production
-export DB_SSL_ENABLED=true
 export NODE_ENV=production
+# Note: SSL is automatically enabled for production and Aurora endpoints
 
 # Chạy migrations
 npm run migration:run

@@ -35,7 +35,10 @@ export class ItemsController {
     description: 'The item has been successfully created.',
     type: Item,
   })
-  @ApiResponse({ status: 400, description: 'Bad Request - Invalid input data.' })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data.',
+  })
   create(@Body() createItemDto: CreateItemDto): Item {
     return this.itemsService.create(createItemDto);
   }
@@ -74,7 +77,10 @@ export class ItemsController {
     type: Item,
   })
   @ApiResponse({ status: 404, description: 'Item not found.' })
-  @ApiResponse({ status: 400, description: 'Bad Request - Invalid input data.' })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data.',
+  })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateItemDto: UpdateItemDto,
@@ -86,7 +92,10 @@ export class ItemsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete an item' })
   @ApiParam({ name: 'id', description: 'Item ID', type: Number })
-  @ApiResponse({ status: 204, description: 'The item has been successfully deleted.' })
+  @ApiResponse({
+    status: 204,
+    description: 'The item has been successfully deleted.',
+  })
   @ApiResponse({ status: 404, description: 'Item not found.' })
   remove(@Param('id', ParseIntPipe) id: number): void {
     return this.itemsService.remove(id);

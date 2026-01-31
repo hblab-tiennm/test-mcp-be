@@ -44,7 +44,9 @@ DB_PORT=5432
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_NAME=your_database_name
-DB_SSL_ENABLED=true
+
+# Note: SSL is automatically enabled for production and non-localhost hosts
+# To disable SSL (not recommended), set: DB_SSL_DISABLED=true
 ```
 
 ## For Production (AWS Aurora)
