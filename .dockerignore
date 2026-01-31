@@ -1,0 +1,61 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Build output
+dist
+build
+
+# Testing
+coverage
+.nyc_output
+*.log
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Documentation
+README.md
+CHANGELOG.md
+*.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Test files
+test
+**/*.spec.ts
+**/*.test.ts
+
+# MCP server (if not needed in production)
+mcp-server
+
+# Misc
+.eslintrc.js
+.prettierrc
+eslint.config.mjs
