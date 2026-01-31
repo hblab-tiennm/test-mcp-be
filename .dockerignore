@@ -46,6 +46,7 @@ CHANGELOG.md
 Dockerfile
 .dockerignore
 docker-compose.yml
+!docker-entrypoint.sh
 
 # Test files
 test

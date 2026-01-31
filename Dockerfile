@@ -31,18 +31,23 @@ RUN npm ci --only=production && npm cache clean --force
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Expose port
 EXPOSE 3000
 
 # Set environment to production
 ENV NODE_ENV=production
 
-# Use non-root user for security
-USER node
-
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }).on('error', () => process.exit(1));"
 
-# Start the application
+# Use non-root user for security
+USER node
+
+# Start the application with entrypoint
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["node", "dist/main"]
